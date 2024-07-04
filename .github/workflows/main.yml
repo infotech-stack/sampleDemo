@@ -35,7 +35,7 @@ jobs:
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+          github_token: ${{ SAMPLE}}
           publish_dir: ./published/wwwroot
           user_name: infotech-stack
           user_email: rksinfotech3@gmail.com
