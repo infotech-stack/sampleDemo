@@ -1,0 +1,42 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches:
+      - master # Trigger on push to the main branch
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+        
+      - name: Setup .NET Core SDK
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'  # Ensure this matches your .NET SDK version (8.0.6)
+
+      - name: Install prerequisites
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y jq
+        
+      - name: Build and publish
+        run: |
+          dotnet publish -c Release -o published
+
+      - name: Configure deployment
+        run: |
+          sed -i 's|<base href="/">|<base href="/sampleDemo/">|g' published/wwwroot/index.html
+          cp published/wwwroot/index.html published/wwwroot/404.html
+          touch published/wwwroot/.nojekyll
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{SAMPLE}}
+          publish_dir: ./published/wwwroot
+          user_name: infotech-stack
+          user_email: rksinfotech3@gmail.com
+          commit_message: 'Deploy via GitHub Actions'
