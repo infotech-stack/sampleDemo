@@ -37,6 +37,6 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./published/wwwroot
-          user_name: stack-infotech
+          user_name: infotech-stack
           user_email: rksinfotech3@gmail.com
           commit_message: 'Deploy via GitHub Actions'
