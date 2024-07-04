@@ -37,5 +37,6 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./published/wwwroot
-          enable_cleanup: true
-          cname: yourcustomdomain.com  # Optional: If you use a custom domain
+          user_name: stack-infotech
+          user_email: rksinfotech3@gmail.com
+          commit_message: 'Deploy via GitHub Actions'
